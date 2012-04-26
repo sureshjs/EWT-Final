@@ -8,23 +8,20 @@
 		$.ajax({
 
 			url: 'http://api.songkick.com/api/3.0/events.json?apikey=Xg8vkYjGIKgGXfrx&artist_name=radiohead&jsoncallback=process_songkick',
-			//url: 'http://api.songkick.com/api/3.0/events.json?apikey=Xg8vkYjGIKgGXfrx&artist_name=radiohead&jsoncallback=?',
-			//url:'http://api.songkick.com/api/3.0/artists/253846/calendar.json?apikey=Xg8vkYjGIKgGXfrx',
 			dataType: 'jsonp',
 			type: 'GET',
-			//jsonpCallback: 'process_songkick'
+
 		});
 
-	
-
-function process_songkick(data) {
-		for (var i=0; i < data.resultsPage.results.length; i++) {
-			var artist = data.resultsPage.results[i];
-			console.log(artist.event);
+function process_songkick(resultsPage) {
+		console.log(resultsPage.results.event[0].location);
+		//for (var i=0; i < data.resultsPage.results.length; i++) {
+			//var artist = data.resultsPage.results[i];
+			//console.log(artist.event);
 			//$("skresults").html($(artist.artist_name));
 			//console.log(artist.artist_name);
 		}
-	}
+	//}
 
 	</script>
 </head>
