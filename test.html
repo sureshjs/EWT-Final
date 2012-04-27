@@ -9,19 +9,24 @@
 
 			url: 'http://api.songkick.com/api/3.0/events.json?apikey=Xg8vkYjGIKgGXfrx&artist_name=radiohead&jsoncallback=process_songkick',
 			dataType: 'jsonp',
-			type: 'GET',
+			type: 'GET'
 
 		});
 
-function process_songkick(resultsPage) {
-		console.log(resultsPage.results.event[0].location);
-		//for (var i=0; i < data.resultsPage.results.length; i++) {
-			//var artist = data.resultsPage.results[i];
-			//console.log(artist.event);
+	function process_songkick(data) {
+		//console.log(resultsPage.results.event[0].location);
+
+		// you weren't accounting for the outer wrapping object of the results
+		// 'resultsPage' is being passed as a child of the wrapping object (in our case, 'data' is the wrapping object)
+		console.log(data.resultsPage.results.event[0].location);
+
+		for (var i=0; i < data.resultsPage.results.event.length; i++) {
+			var event = data.resultsPage.results.event[i];
+			console.log(event);
 			//$("skresults").html($(artist.artist_name));
 			//console.log(artist.artist_name);
 		}
-	//}
+	}
 
 	</script>
 </head>
