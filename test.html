@@ -1,31 +1,91 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<script type="text/javascript">
-
-
-		$.ajax({
-
-			url: 'http://api.songkick.com/api/3.0/events.json?apikey=Xg8vkYjGIKgGXfrx&artist_name=radiohead&jsoncallback=process_songkick',
-			dataType: 'jsonp',
-			type: 'GET',
-
-		});
-
-function process_songkick(resultsPage) {
-		console.log(resultsPage.results.event[0].location);
-		//for (var i=0; i < data.resultsPage.results.length; i++) {
-			//var artist = data.resultsPage.results[i];
-			//console.log(artist.event);
-			//$("skresults").html($(artist.artist_name));
-			//console.log(artist.artist_name);
-		}
-	//}
-
-	</script>
+	<link href="default.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+	
+	Check if they're coming to Chicago: <input type="search" id="search" name="search" value="" />
+	<button type="button" id="search-button" name="search-button"></button>
+
 	<div id="skresults"></div>
+	<div id="map_canvas"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() { 
+
+		$('#search-button').click(function(e) { 
+
+			var searchword = $('#search').val();
+			console.log(searchword);
+
+			$.ajax({
+
+				url: 'http://api.songkick.com/api/3.0/events.json?apikey=Xg8vkYjGIKgGXfrx&artist_name=' + searchword + '&jsoncallback=process_songkick',
+				dataType: 'jsonp',
+				type: 'GET',
+
+			});
+		});
+	});
+
+function process_songkick(data) {
+
+clear_event();
+
+		//console.log(data.resultsPage.results.event[0].displayName);
+
+		for (var i=0; i < data.resultsPage.results.event.length; i++) {
+
+			var events = data.resultsPage.results.event[i];
+			//console.log(events);
+			//console.log(data.resultsPage.results.event[i].location.city);
+			if (events.location.city == "Chicago, IL, US") {
+				$('#skresults').append($('<div class="band">' + events.displayName + '</div>'));
+				var lat = events.location.lat;
+				var lng = events.location.lng;
+				console.log(lat, lng);
+
+				loadScript(lat, lng);
+			}
+
+
+		} 
+
+
+	}
+
+function clear_event() {
+
+	$('.band').remove();
+}
+
+
+
+function initialize(lat, lng) {
+	console.log(lat, lng);
+  var myOptions = {
+    zoom: 8,
+    center: new google.maps.LatLng(lat, lng),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+  var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+}
+
+function loadScript(lat, lng) {
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src = 'http://maps.googleapis.com/maps/api/js?key=AIzaSyCftB9i2X36HZHjrsbN5-4vgayypOUkj9M&sensor=false&callback=initialize=' + lat + '&' + lng;
+  document.body.appendChild(script);
+  console.log(lat, lng);
+  
+}
+
+//window.onload = loadScript;
+
+</script>
+
 </body>
 </html>
