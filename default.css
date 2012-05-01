@@ -2,10 +2,63 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  overflow: hidden;
+  background-color: #F5F5F5;
+}
+
+#container {
+  position: relative;
+  margin: 1%;
+
+
+}
+
+#textandbutton {
+
+  
+}
+
+#skresults {
+  position: relative;
+  
+  font-family: 'LimelightRegular', serif;
+  font-size: 2.1em;
+  color: red;
+
 }
 
 #map_canvas {
   height: 100%;
+  
+  
+}
+
+label {
+  font-family: 'BebasNeueRegular', sans-serif;
+  font-size: 3em;
+}
+
+button {
+
+  background-color:#d1d1d1;
+  -moz-border-radius:13px;
+  -webkit-border-radius:13px;
+  border-radius:13px;
+  display:inline-block;
+  color:#696969;
+  font-family:'Times New Roman';
+  font-size:1em;
+  font-weight:bold;
+  padding:2px 10px;
+  text-decoration:none;
+  
+}
+button:hover {
+  background-color:#dfdfdf;
+}
+button:active {
+  position:relative;
+  top:1px;
 }
 
 @media print {
@@ -16,4 +69,30 @@ html, body {
   #map_canvas {
     height: 650px;
   }
+}
+
+/*------FONTS---------*/
+
+@font-face {
+    font-family: 'LimelightRegular';
+    src: url('fonts/Limelight-webfont.eot');
+    src: url('fonts/Limelight-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/Limelight-webfont.woff') format('woff'),
+         url('fonts/Limelight-webfont.ttf') format('truetype'),
+         url('fonts/Limelight-webfont.svg#LimelightRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'BebasNeueRegular';
+    src: url('fonts/BebasNeue-webfont.eot');
+    src: url('fonts/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/BebasNeue-webfont.woff') format('woff'),
+         url('fonts/BebasNeue-webfont.ttf') format('truetype'),
+         url('fonts/BebasNeue-webfont.svg#BebasNeueRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
 }
